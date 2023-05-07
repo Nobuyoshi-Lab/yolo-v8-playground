@@ -1,0 +1,3 @@
+yolov4,yolov4.weights,https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
+yolov4,yolov4.cfg,https://raw.githubusercontent.com/AlexeyAB/darknet/master/cfg/yolov4.cfg
+yolov4,coco.names,https://raw.githubusercontent.com/AlexeyAB/darknet/master/data/coco.names
