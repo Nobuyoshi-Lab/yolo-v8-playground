@@ -1,10 +1,10 @@
 import os
 import re
 import tkinter as tk
-from tkinter import filedialog, simpledialog
-from tkinter import ttk
-from ultralytics import YOLO
 import ultralytics.yolo.data.utils as utils
+
+from tkinter import filedialog, simpledialog, ttk, PhotoImage
+from ultralytics import YOLO
 
 CONFIDENCE_THRESHOLD = 0.2
 IMAGE_FORMATS = utils.IMG_FORMATS
@@ -205,6 +205,9 @@ class YoloApp:
 
 def main():
     root = tk.Tk()
+    root.title("YOLOv8 Playground")
+    icon_image = tk.PhotoImage(file='dot.png')
+    root.iconphoto(True, icon_image)
     root.withdraw()
 
     app = YoloApp()
