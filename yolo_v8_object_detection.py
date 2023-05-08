@@ -46,6 +46,11 @@ class YoloFileProcessor:
             save=True,
             show=True,
             save_txt=True,
+            # stream=True, 
+            # https://docs.ultralytics.com/modes/predict:
+            # Streaming mode with stream=True should be used for long videos or
+            # large predict sources, otherwise results will accumuate in memory
+            # and will eventually cause out-of-memory errors.
         )
         return results_gen is not None
 
@@ -116,10 +121,8 @@ class InputSelectionDialog(tk.Toplevel):
         size_menu.pack(pady=10)
 
 
-def select_input(parent):
-    input_dialog = InputSelectionDialog(parent)
+def select_input(input_dialog):
     input_dialog.wait_window()
-
     return input_dialog.choice
 
 
@@ -143,7 +146,8 @@ class YoloApp:
         self.yolo_processor = None
 
     def process_input(self, parent):
-        input_type = select_input(parent)
+        input_dialog = InputSelectionDialog(parent)
+        input_type = select_input(input_dialog)
 
         if input_type is None:
             print("Exiting...")
@@ -158,8 +162,8 @@ class YoloApp:
             print("No input provided. Exiting...")
             return
 
-        task_suffix = parent.task_var.get()
-        size_suffix = parent.size_var.get()
+        task_suffix = input_dialog.task_var.get()
+        size_suffix = input_dialog.size_var.get()
 
         model_version = f"yolov8{SIZE_DICT[size_suffix]}{TASK_DICT[task_suffix]}.pt"
         self.yolo_processor = YoloFileProcessor(model_version=model_version)
