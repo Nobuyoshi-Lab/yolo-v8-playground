@@ -5,7 +5,7 @@ from tkinter import ttk
 from ultralytics import YOLO
 import ultralytics.yolo.data.utils as utils
 
-CONFIDENCE_THRESHOLD = 0.55
+CONFIDENCE_THRESHOLD = 0.2
 IMAGE_FORMATS = utils.IMG_FORMATS
 VIDEO_FORMATS = utils.VID_FORMATS
 
@@ -46,7 +46,7 @@ class YoloFileProcessor:
             save=True,
             show=True,
             save_txt=True,
-            # stream=True, 
+            # stream=True,
             # https://docs.ultralytics.com/modes/predict:
             # Streaming mode with stream=True should be used for long videos or
             # large predict sources, otherwise results will accumuate in memory
@@ -113,11 +113,16 @@ class InputSelectionDialog(tk.Toplevel):
             window,
             self.task_var,
             "Instance Segmentation",
-            *TASK_DICT.keys())
+            *TASK_DICT.keys()
+        )
         task_menu.pack(pady=10)
 
         size_menu = ttk.OptionMenu(
-            window, self.size_var, "Nano", *SIZE_DICT.keys())
+            window, 
+            self.size_var, 
+            "Nano", 
+            *SIZE_DICT.keys()
+        )
         size_menu.pack(pady=10)
 
 

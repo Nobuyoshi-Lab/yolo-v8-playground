@@ -1,4 +1,4 @@
-# yolo_v8_playground
+# YOLOv8 Playground
 
 This is a simple Python application that uses the YOLOv8 model to perform object detection, instance segmentation, pose estimation, and classification on images and videos. The app uses a graphical user interface (GUI) for input selection and configuration.
 
@@ -47,3 +47,7 @@ python yolo_v8_object_detection.py
 3. Choose the size of the model: Nano, Small, Medium, Large, or Extra Large.
 4. Click on "File" or "URL" to select an input source (image or video file, or a URL pointing to an image or video).
 5. The app will process the input and display the results. The processed images or videos will be saved in the `runs` folder.
+
+# Credits
+
+This application is based on the [YOLOv8](https://github.com/ultralytics/ultralytics). All credit goes to the original authors. This repository is only a GUI to make it easier to use the model.
