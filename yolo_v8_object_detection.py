@@ -1,4 +1,5 @@
 import os
+import re
 import tkinter as tk
 from tkinter import filedialog, simpledialog
 from tkinter import ttk
@@ -118,9 +119,9 @@ class InputSelectionDialog(tk.Toplevel):
         task_menu.pack(pady=10)
 
         size_menu = ttk.OptionMenu(
-            window, 
-            self.size_var, 
-            "Nano", 
+            window,
+            self.size_var,
+            "Nano",
             *SIZE_DICT.keys()
         )
         size_menu.pack(pady=10)
@@ -146,6 +147,25 @@ def ask_url(parent):
     return url_dialog.result
 
 
+def process_youtube_url(url):
+    youtube_shorts_pattern = re.compile(
+        r"(https?://)?(www\.)?youtube\.com/shorts/([a-zA-Z0-9_-]+)")
+    youtube_short_link_pattern = re.compile(
+        r"(https?://)?(www\.)?youtu\.be/([a-zA-Z0-9_-]+)")
+
+    shorts_match = youtube_shorts_pattern.match(url)
+    short_link_match = youtube_short_link_pattern.match(url)
+
+    if shorts_match:
+        video_id = shorts_match.group(3)
+        url = f"https://www.youtube.com/watch?v={video_id}"
+    elif short_link_match:
+        video_id = short_link_match.group(3)
+        url = f"https://www.youtube.com/watch?v={video_id}"
+
+    return url
+
+
 class YoloApp:
     def __init__(self):
         self.yolo_processor = None
@@ -162,6 +182,7 @@ class YoloApp:
             file_path = select_file(parent)
         else:
             file_path = ask_url(parent)
+            file_path = process_youtube_url(file_path)
 
         if not file_path:
             print("No input provided. Exiting...")
