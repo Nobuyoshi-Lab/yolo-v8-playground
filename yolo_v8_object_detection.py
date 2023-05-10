@@ -177,6 +177,11 @@ class YoloApp:
         input_dialog = InputSelectionDialog(parent)
         input_type = select_input(input_dialog)
 
+        if input_type is None:
+            return False
+
+        file_path = None
+
         if input_type == "file":
             file_path = select_file(parent)
         elif input_type == "url":
@@ -186,8 +191,7 @@ class YoloApp:
             pass
 
         if not file_path:
-            print("No input provided. Exiting...")
-            return
+            return self.process_input(parent)
 
         task_suffix = input_dialog.task_var.get()
         size_suffix = input_dialog.size_var.get()
@@ -203,6 +207,8 @@ class YoloApp:
         else:
             print(f"Failed to process {input_type}")
 
+        return True
+
 
 def main():
     root = tk.Tk()
@@ -214,11 +220,11 @@ def main():
 
     app = YoloApp()
     input_choice = app.process_input(root)
-
-    if input_choice is None:
-        return
-    else:
+    
+    if input_choice:
         root.mainloop()
+    else:
+        print("Exiting...")
 
 
 if __name__ == '__main__':
