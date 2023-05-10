@@ -3,7 +3,7 @@ import re
 import tkinter as tk
 import ultralytics.yolo.data.utils as utils
 
-from tkinter import filedialog, simpledialog, ttk, PhotoImage
+from tkinter import filedialog, simpledialog, ttk
 from ultralytics import YOLO
 
 CONFIDENCE_THRESHOLD = 0.2
