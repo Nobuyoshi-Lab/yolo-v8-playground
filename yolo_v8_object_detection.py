@@ -148,6 +148,9 @@ def ask_url(parent):
 
 
 def process_youtube_url(url):
+    if url is None:
+        return
+
     youtube_shorts_pattern = re.compile(
         r"(https?://)?(www\.)?youtube\.com/shorts/([a-zA-Z0-9_-]+)")
     youtube_short_link_pattern = re.compile(
@@ -174,15 +177,13 @@ class YoloApp:
         input_dialog = InputSelectionDialog(parent)
         input_type = select_input(input_dialog)
 
-        if input_type is None:
-            print("Exiting...")
-            return
-
         if input_type == "file":
             file_path = select_file(parent)
-        else:
+        elif input_type == "url":
             file_path = ask_url(parent)
             file_path = process_youtube_url(file_path)
+        else:
+            pass
 
         if not file_path:
             print("No input provided. Exiting...")
