@@ -206,7 +206,8 @@ class YoloApp:
 def main():
     root = tk.Tk()
     root.title("YOLOv8 Playground")
-    icon_image = tk.PhotoImage(file='dot.png')
+    icon_path = os.path.join(os.path.dirname(__file__), 'dot.png')
+    icon_image = tk.PhotoImage(file=icon_path)
     root.iconphoto(True, icon_image)
     root.withdraw()
 
